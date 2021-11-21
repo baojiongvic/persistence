@@ -1,0 +1,5 @@
+<mapper namespace="user">
+    <select id="" parameterType="" resultType="">
+
+    </select>
+</mapper>
