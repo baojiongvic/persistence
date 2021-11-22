@@ -17,8 +17,16 @@ import java.util.Properties;
  **/
 public class XmlConfigBuilder {
 
+    private final Configuration configuration;
+
+    public XmlConfigBuilder() {
+        this.configuration = new Configuration();
+    }
+
     public Configuration parse(InputStream is) throws DocumentException, PropertyVetoException {
         Document document = new SAXReader().read(is);
+
+        // 解析sqlMapConfig.xml
         Element rootElement = document.getRootElement();
         List<Element> list = rootElement.selectNodes("//property");
         Properties properties = new Properties();
@@ -30,8 +38,13 @@ public class XmlConfigBuilder {
         dataSource.setJdbcUrl(properties.getProperty("jdbcUrl"));
         dataSource.setUser(properties.getProperty("username"));
         dataSource.setPassword(properties.getProperty("password"));
-        Configuration configuration = new Configuration();
         configuration.setDataSource(dataSource);
+
+        // 解析mapper.xml
+        List<Element> mapperList = rootElement.selectNodes("//mapper");
+        mapperList.forEach(mapper -> {
+
+        });
         return configuration;
     }
 }
