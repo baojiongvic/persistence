@@ -1,6 +1,8 @@
 package com.vic.persistence.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import com.mchange.v2.resourcepool.ResourcePool;
+import com.vic.persistence.io.Resource;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -42,9 +44,12 @@ public class XmlConfigBuilder {
 
         // 解析mapper.xml
         List<Element> mapperList = rootElement.selectNodes("//mapper");
-        mapperList.forEach(mapper -> {
-
-        });
+        for (Element mapper : mapperList) {
+            String resource = mapper.attributeValue("resource");
+            InputStream inputStream = Resource.getResourceAsStream(resource);
+            XmlMapperBuilder xmlMapperBuilder = new XmlMapperBuilder(configuration);
+            xmlMapperBuilder.parse(inputStream);
+        }
         return configuration;
     }
 }

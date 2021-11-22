@@ -1,5 +1,10 @@
 <mapper namespace="user">
-    <select id="" parameterType="" resultType="">
-
+    <select id="selectList" resultType="com.vic.mapper.entity.User">
+        select * from user
     </select>
+
+    <select id="selectOne" parameterType="com.vic.mapper.entity.User" resultType="com.vic.mapper.entity.User">
+        select * from user where id = #{id} and name = #{name}
+    </select>
+
 </mapper>

@@ -20,15 +20,15 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <hutool.version>5.5.9</hutool.version>
-        <lombok.version>1.18.20</lombok.version>
+        <hutool.version>5.7.16</hutool.version>
+        <lombok.version>1.18.22</lombok.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.49</version>
+            <version>8.0.25</version>
         </dependency>
         <dependency>
             <groupId>c3p0</groupId>
@@ -38,12 +38,12 @@
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.12</version>
+            <version>1.2.17</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
+            <version>4.13.2</version>
         </dependency>
         <dependency>
             <groupId>dom4j</groupId>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>jaxen</groupId>
             <artifactId>jaxen</artifactId>
-            <version>1.1.6</version>
+            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
