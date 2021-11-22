@@ -9,7 +9,6 @@ import java.io.InputStream;
 public class Resource {
 
     public static InputStream getResourceAsStream(String path) {
-        InputStream inputStream = Resource.class.getClassLoader().getResourceAsStream(path);
-        return inputStream;
+        return Resource.class.getClassLoader().getResourceAsStream(path);
     }
 }
