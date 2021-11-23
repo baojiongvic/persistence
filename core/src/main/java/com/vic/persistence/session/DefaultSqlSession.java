@@ -2,14 +2,17 @@ package com.vic.persistence.session;
 
 import com.vic.persistence.config.Configuration;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Proxy;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author vic
  * @date 2021-11-22 22:34:01
  **/
 public class DefaultSqlSession implements SqlSession {
+
+    public static final String STATEMENT_ID = "%s.%s";
 
     private final Configuration configuration;
 
@@ -31,5 +34,18 @@ public class DefaultSqlSession implements SqlSession {
         } else {
             throw new RuntimeException("查询结果为空或者大于1");
         }
+    }
+
+    @Override
+    public <T> T getMapper(Class<?> clazz) {
+        return (T) Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{clazz},
+                (proxy, method, args) -> {
+            String statementId = String.format(STATEMENT_ID, method.getDeclaringClass().getName(), method.getName());
+            // 根据返回类型是不是泛型参数化判断返回结果是多条还是单条
+            if (method.getGenericReturnType() instanceof ParameterizedType) {
+                return selectList(statementId, args);
+            }
+            return selectOne(statementId, args);
+        });
     }
 }

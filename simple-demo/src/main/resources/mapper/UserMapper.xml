@@ -1,4 +1,4 @@
-<mapper namespace="user">
+<mapper namespace="com.vic.mapper.IUserMapper">
     <select id="selectList" resultType="com.vic.mapper.entity.User">
         select * from user
     </select>

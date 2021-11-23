@@ -26,12 +26,19 @@ public class MapperTest {
         User user = new User();
         user.setId(1);
         user.setName("张三");
-        User result = sqlSession.selectOne("user.selectOne", user);
-        System.out.println(result.toString());
 
-        List<User> list = sqlSession.selectList("user.selectList", null);
+//        User result = sqlSession.selectOne("IUserMapper.selectOne", user);
+//        System.out.println(result.toString());
+//
+//        List<User> list = sqlSession.selectList("IUserMapper.selectList", null);
+//        System.out.println(list.toString());
+
+        IUserMapper userMapper = sqlSession.getMapper(IUserMapper.class);
+        List<User> list = userMapper.selectList();
         System.out.println(list.toString());
 
+        User result = userMapper.selectOne(user);
+        System.out.println(result.toString());
     }
 
 }
